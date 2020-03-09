@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CA1031: Não capturar exceptions de tipos genéricos
+dotnet_diagnostic.CA1031.severity = none
+
+# IDE0022: Usar o corpo do bloco para métodos
+csharp_style_expression_bodied_methods = false:silent
