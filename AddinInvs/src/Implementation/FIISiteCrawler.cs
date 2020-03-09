@@ -12,7 +12,7 @@ using AddinInvs.src.Model;
 namespace AddinInvs.src.Implementation
 {
     /// <summary>
-    /// Implementação concreta do Crawler
+    /// Implementação concreta do Crawler do site fiis.com.br
     /// </summary>
     public class FIISiteCrawler : ICrawler
     {

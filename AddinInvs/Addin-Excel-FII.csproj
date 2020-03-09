@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\FundoImobiliario.cs" />
     <Compile Include="src\Implementation\FIISiteCrawler.cs" />
     <Compile Include="src\Implementation\SiteFundsExplorer.cs" />
     <Compile Include="src\Interfaces\ICrawler.cs" />

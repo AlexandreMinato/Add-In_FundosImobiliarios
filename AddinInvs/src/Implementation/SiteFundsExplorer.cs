@@ -13,14 +13,33 @@ namespace AddinInvs.src.Implementation
 {
     class SiteFundsExplorer : ICrawler
     {
+        /// <summary>
+        /// Implementação concreta do site fundsexplorer.com.br
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="B3Code"></param>
+        /// <returns></returns>
         public T Fill<T>(string B3Code) where T : DadosBase, new()
         {
-            var fund = new FundsExplorerModel();
+            return Usefull.GetCache<T>(() =>
+            {
+                var fund = new FundsExplorerModel();
             var document = this.LoadUrl("url.site.fundsexplorer", B3Code);
 
-            //TODO: Implementar FundsExplorer
+            var indices = document.GetElementbyId("simulation")
+                    .Descendants("div")
+                    .Where(node => node.GetAttributeValue("class", "").Equals("section-body")).ToList();
 
-            return fund as T;
+
+            fund.ComparacaoPoupanca = indices[0].Descendants("div")
+                .Where(node => node.GetAttributeValue("class", "").Equals("col-md-6 col-xs-12"))
+                .ToList()[1].Descendants("li").Last().Descendants("span").ToList()[1].InnerText;
+                
+
+                return fund as T;
+
+
+            }, B3Code);
 
         }
 
