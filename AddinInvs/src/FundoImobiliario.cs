@@ -27,18 +27,18 @@ namespace Minato.AddinInvestidor
                 .Descendants("span")
                 .Where(node => node.GetAttributeValue("class", "").Equals("value")).ToList();
 
-            fund.PercentualUltimoYeld = indices[0].InnerText;
-            fund.UltimoPagamento = indices[1].InnerText;
-            fund.PatrimonioFundo = indices[2].InnerText;
-            fund.PatrimonioPorCota = indices[3].InnerText;
-            
+            fund.PercentualUltimoYeld = indices[0].InnerText; //TODO: tratar parse
+            fund.UltimoPagamento = indices[1].InnerText;//TODO: tratar parse
+            fund.PatrimonioFundo = indices[2].InnerText;//TODO: tratar parse
+            fund.PatrimonioPorCota = indices[3].InnerText;//TODO: tratar parse
+
 
             var quote = document.DocumentNode.Descendants("div")
                 .First(p => p.GetAttributeValue("class", "").Equals("item quotation"))
                 .Descendants("span")
                 .Where(p => p.GetAttributeValue("class", "").Equals("value"))
                 .First().InnerText;
-            fund.Cotacao = quote;
+            fund.Cotacao = quote;//TODO: tratar parse
 
             var basicInformation = document.GetElementbyId("informations--basic")
                 .Descendants("div")
@@ -63,6 +63,7 @@ namespace Minato.AddinInvestidor
 
             fund.CNPJ = lastRow[2].Descendants("span").Where(p => p.GetAttributeValue("class", "").Equals("value")).First().InnerText;
 
+            //TODO: tratar parse
             fund.TotalCotas = lastRow[0].Descendants("span").Where(p => p.GetAttributeValue("class", "").Equals("value")).First().InnerText;
             fund.TotalCotistas = lastRow[1].Descendants("span").Where(p => p.GetAttributeValue("class", "").Equals("value")).First().InnerText;
 
