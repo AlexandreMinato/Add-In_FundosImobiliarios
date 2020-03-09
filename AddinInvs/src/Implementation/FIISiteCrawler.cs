@@ -38,7 +38,7 @@ namespace AddinInvs.src.Implementation
                     .Descendants("span")
                     .Where(p => p.GetAttributeValue("class", "").Equals("value"))
                     .First().InnerText;
-                fund.Cotacao = quote;//TODO: tratar parse
+                fund.Cotacao = Double.Parse(quote.ClearText());//TODO: tratar parse
 
                 var basicInformation = document.GetElementbyId("informations--basic")
                     .Descendants("div")

@@ -33,9 +33,13 @@ namespace Minato.AddinInvestidor
         public static dynamic FII_CNPJ([ExcelArgument(Name = "Código do Fundo", Description = "Código na B3 do Fundo Imobiliário")] string fundo) =>
             Usefull.Run(() => crawlerFII.Fill<SiteFIIModel>(fundo).CNPJ,fundo);
         
-        [ExcelFunction(Description = "Consulta a cotação do fundo. Fonte > fiis.com.br")]
+        [ExcelFunction(Description = "Consulta a cotação do fundo. Fonte > fundsexplorer.com.br")]
         public static dynamic FII_COTACAO([ExcelArgument(Name = "Código do Fundo", Description = "Código na B3 do Fundo Imobiliário")] string fundo) =>
-            Usefull.Run(() => crawlerFII.Fill<SiteFIIModel>(fundo).Cotacao, fundo);
+            Usefull.Run(() => crawlerFound.Fill<FundsExplorerModel>(fundo).Cotacao, fundo);
+
+        [ExcelFunction(Description = "Consulta a variação da cotação do fundo. Fonte > fundsexplorer.com.br")]
+        public static dynamic FII_COTACAO_VARIACAO([ExcelArgument(Name = "Código do Fundo", Description = "Código na B3 do Fundo Imobiliário")] string fundo) =>
+            Usefull.Run(() => crawlerFound.Fill<FundsExplorerModel>(fundo).VariacaoCotacao, fundo);
 
 
         [ExcelFunction(Description = "Consulta da data de registro na CVM. Fonte > fiis.com.br")]

@@ -13,5 +13,7 @@ namespace AddinInvs.src.Interfaces
         public string PercentualUltimoYeld { get; set; }//TODO: Tipar
         public string TipoFundoB3 { get; set; }
         public string UltimoPagamento { get; set; } //TODO: Tipar
+        public double Cotacao { get; set; }
+        public string VariacaoCotacao { get; set; }
     }
 }

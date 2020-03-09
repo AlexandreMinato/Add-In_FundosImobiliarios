@@ -24,17 +24,22 @@ namespace AddinInvs.src.Implementation
             return Usefull.GetCache<T>(() =>
             {
                 var fund = new FundsExplorerModel();
-            var document = this.LoadUrl("url.site.fundsexplorer", B3Code);
+                var document = this.LoadUrl("url.site.fundsexplorer", B3Code);
 
-            var indices = document.GetElementbyId("simulation")
-                    .Descendants("div")
-                    .Where(node => node.GetAttributeValue("class", "").Equals("section-body")).ToList();
+                var indices = document.GetElementbyId("simulation")
+                        .Descendants("div")
+                        .Where(node => node.GetAttributeValue("class", "").Equals("section-body")).ToList();
 
 
-            fund.ComparacaoPoupanca = indices[0].Descendants("div")
+                var cotacao = document.GetElementbyId("stock-price").Descendants("span");
+
+                fund.VariacaoCotacao = cotacao.First(p => p.GetAttributeValue("class", "").Contains("percentage ")).InnerText.ClearText();
+                fund.Cotacao = Double.Parse(cotacao.First(p => p.GetAttributeValue("class", "").Equals("price")).InnerText.ClearText());
+
+                fund.ComparacaoPoupanca = indices[0].Descendants("div")
                 .Where(node => node.GetAttributeValue("class", "").Equals("col-md-6 col-xs-12"))
                 .ToList()[1].Descendants("li").Last().Descendants("span").ToList()[1].InnerText;
-                
+
 
                 return fund as T;
 

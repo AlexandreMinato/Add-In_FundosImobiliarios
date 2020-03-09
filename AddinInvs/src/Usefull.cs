@@ -55,6 +55,10 @@ namespace Minato.AddinInvestidor.Util
             htmlDocument.LoadHtml(html.Result);
         }
 
+        internal static string ClearText(this string text)
+        {
+            return text.Replace("R$", "").Replace("\n", "").Trim();
+        }
 
         /// <summary>
         /// Meto que verifica se tem Cache na consulta do fundo, se tiver usa do cache, senão usa um delegate para executar o metodo e colocar o resultado no cache

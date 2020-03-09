@@ -13,7 +13,7 @@ namespace AddinInvs.src.Model
         public string TipoFundoAnbima { get; set; }
         public DateTime DataRegistroCVM { get; set; }
         
-        public string Cotacao { get; set; }//TODO: Tipar
+        
         public string PatrimonioFundo { get; set; }//TODO: Tipar
         public string CNPJ { get; set; }
         public string TotalCotas { get; set; }//TODO: Tipar
