@@ -1,5 +1,6 @@
 ﻿using AddinInvs.src.Implementation;
 using AddinInvs.src.Interfaces;
+using AddinInvs.src.Model;
 using ExcelDna.Integration;
 using Minato.AddinInvestidor.Util;
 using System;

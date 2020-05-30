@@ -84,6 +84,7 @@
     <Compile Include="src\InterfaceExcel.cs" />
     <Compile Include="src\Interfaces\IDadosBasicos.cs" />
     <Compile Include="src\Model\FundsExplorerModel.cs" />
+    <Compile Include="src\Model\FundsExplorerRankinModel.cs" />
     <Compile Include="src\Model\SiteFIIModel.cs" />
     <Compile Include="src\Usefull.cs" />
   </ItemGroup>
