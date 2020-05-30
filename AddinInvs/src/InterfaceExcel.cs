@@ -11,10 +11,11 @@ namespace Minato.AddinInvestidor
     /// <summary>
     /// Classe responsável pelo Facade com o Excel.
     /// </summary>
-    public class InterfaceExcel : IExcelAddIn
+    public partial class InterfaceExcel : IExcelAddIn
     {
         public static ICrawler crawlerFII;
         public static ICrawler crawlerFound;
+    
         public static SiteFIIModel FIImodel;
         public static FundsExplorerModel Foundsmodel;
 
@@ -24,10 +25,14 @@ namespace Minato.AddinInvestidor
             IntelliSenseServer.Install();
             crawlerFII = new FIISiteCrawler();
             crawlerFound = new SiteFundsExplorer();
+            
 
         }
         public void AutoClose() => IntelliSenseServer.Uninstall();
 
+
+
+        
 
         [ExcelFunction(Description = "Consulta o CNPJ do fundo. Fonte > fiis.com.br")]
         public static dynamic FII_CNPJ([ExcelArgument(Name = "Código do Fundo", Description = "Código na B3 do Fundo Imobiliário")] string fundo) =>

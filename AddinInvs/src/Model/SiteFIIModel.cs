@@ -14,12 +14,12 @@ namespace AddinInvs.src.Model
         public DateTime DataRegistroCVM { get; set; }
         
         
-        public string PatrimonioFundo { get; set; }//TODO: Tipar
+        public double PatrimonioFundo { get; set; }//TODO: Tipar
         public string CNPJ { get; set; }
-        public string TotalCotas { get; set; }//TODO: Tipar
-        public string TotalCotistas { get; set; }//TODO: Tipar
+        public double TotalCotas { get; set; }//TODO: Tipar
+        public double TotalCotistas { get; set; }//TODO: Tipar
 
-        public string PatrimonioPorCota { get; set; }//TODO: Tipar
+        public double PatrimonioPorCota { get; set; }//TODO: Tipar
 
     }
 }

@@ -10,10 +10,10 @@ namespace AddinInvs.src.Interfaces
     {
         public string Codigo { get; set; }
         public string NomeFundo { get; set; }
-        public string PercentualUltimoYeld { get; set; }//TODO: Tipar
+        public double PercentualUltimoYeld { get; set; }
         public string TipoFundoB3 { get; set; }
-        public string UltimoPagamento { get; set; } //TODO: Tipar
+        public double UltimoPagamento { get; set; }
         public double Cotacao { get; set; }
-        public string VariacaoCotacao { get; set; }
+        public double VariacaoCotacao { get; set; }
     }
 }

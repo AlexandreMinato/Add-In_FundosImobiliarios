@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AddinInvs.src.Implementation
 {
-    class SiteFundsExplorer : ICrawler
+    public class SiteFundsExplorer : ICrawler
     {
         /// <summary>
         /// Implementação concreta do site fundsexplorer.com.br
@@ -24,21 +24,23 @@ namespace AddinInvs.src.Implementation
             return Usefull.GetCache<T>(() =>
             {
                 var fund = new FundsExplorerModel();
-                var document = this.LoadUrl("url.site.fundsexplorer", B3Code);
+                var HtmlDocument = this.LoadUrl("url.site.fundsexplorer", B3Code);
 
-                var indices = document.GetElementbyId("simulation")
+                var indices = HtmlDocument.GetElementbyId("simulation")
                         .Descendants("div")
-                        .Where(node => node.GetAttributeValue("class", "").Equals("section-body")).ToList();
+                        .Where(Usefull.PredicateFindValueClass("section-body"));
 
+                var cotacao = HtmlDocument.GetElementbyId("stock-price").Descendants("span");
 
-                var cotacao = document.GetElementbyId("stock-price").Descendants("span");
+                fund.VariacaoCotacao = cotacao.First(p => p.GetAttributeValue("class", "").Contains("percentage ")).GetValueText();
+                fund.Cotacao = cotacao.First(Usefull.PredicateFindValueClass("price")).GetValueText();
 
-                fund.VariacaoCotacao = cotacao.First(p => p.GetAttributeValue("class", "").Contains("percentage ")).InnerText.ClearText();
-                fund.Cotacao = Double.Parse(cotacao.First(p => p.GetAttributeValue("class", "").Equals("price")).InnerText.ClearText());
-
-                fund.ComparacaoPoupanca = indices[0].Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "").Equals("col-md-6 col-xs-12"))
-                .ToList()[1].Descendants("li").Last().Descendants("span").ToList()[1].InnerText;
+                fund.ComparacaoPoupanca = indices.First()
+                .Descendants("div")
+                .Where(Usefull.PredicateFindValueClass("col-md-6 col-xs-12")).ElementAt(1)
+                .Descendants("li")
+                .Last()
+                .Descendants("span").ElementAt(1).InnerText.ClearText();
 
 
                 return fund as T;

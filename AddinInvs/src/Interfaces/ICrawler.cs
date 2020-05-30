@@ -9,7 +9,7 @@ namespace AddinInvs.src.Interfaces
 {
     public interface ICrawler
     {
-        HtmlDocument LoadUrl(string keyUrlSite, string B3Code);
+        HtmlDocument LoadUrl(string keyUrlSite, string B3Code = null);
         T Fill<T>(string B3Code) where T : DadosBase, new();
 
     }

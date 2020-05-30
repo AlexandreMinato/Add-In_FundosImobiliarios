@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 
 namespace Minato.AddinInvestidor.Util
 {
@@ -55,9 +57,19 @@ namespace Minato.AddinInvestidor.Util
             htmlDocument.LoadHtml(html.Result);
         }
 
+        internal static string GetClearText(this HtmlNode node)
+        {
+            return node.InnerText.ClearText();
+        }
+
+        internal static double GetValueText(this HtmlNode node)
+        {
+            return double.Parse(node.GetClearText());
+        }
+
         internal static string ClearText(this string text)
         {
-            return text.Replace("R$", "").Replace("\n", "").Trim();
+            return text.Replace("R$", "").Replace("\n", "").Replace("%", "").Trim();
         }
 
         /// <summary>
@@ -83,6 +95,20 @@ namespace Minato.AddinInvestidor.Util
             return cachedItem;
 
         }
-        
+
+        public static Func<HtmlNode, bool> PredicateFindValueClass(string node_value)
+        {
+            return p => p.GetAttributeValue("class", "").Equals(node_value);
+        }
+        public static double GetValueSpan(this HtmlNode node)
+        {
+            return double.Parse(node.Descendants("span").Where(p => p.GetAttributeValue("class", "").Equals("value")). First().InnerText.ClearText());
+        }
+
+        public static string GetTextSpan(this HtmlNode node)
+        {
+            return node.Descendants("span").Where(p => p.GetAttributeValue("class", "").Equals("value")).First().InnerText;
+        }
+
     }
 }
