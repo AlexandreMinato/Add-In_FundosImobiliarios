@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AddinInvs.src
 {
+
     public partial class InterfaceExcel
     {
         public static ICrawler crawlerRanking = new FIIs_FundsExplorer_Ranking();
